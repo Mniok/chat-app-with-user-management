@@ -14,6 +14,10 @@
 
         public string? UserRole { get; set; }
 
+        public int? MutedUntil { get; set; } // UnixTime timestamp
+
+        public int? BannedUntil { get; set; } // same
+
 
 
         public User(int Id, string Name, string Pass, string Role) {
@@ -23,6 +27,8 @@
             this.Password = Pass;
             this.CreatedAt = DateTime.Now;
             this.UserRole = Role;
+            this.MutedUntil = null;
+            this.BannedUntil = null;
         }
 
         public User() { }       //bez tego wywalało się _context.User.whatever()
@@ -35,6 +41,8 @@
 
         //relacje:
 
-        public List<Song> uploadedSongs { get; } = new();
+        public List<Song> uploadedSongs { get; } = new();  // unused in this project!
+
+        public List<ChatMessage> postedMessages { get; } = new();
     }
 }
