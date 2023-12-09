@@ -2,7 +2,7 @@
 {
     public class ChatMessage
     {
-        public int MessageId { get; set; }
+        public int Id { get; set; } // property "Id" is by default set as primary key 
 
         public string Content { get; set; }
 
@@ -18,7 +18,7 @@
 
         public ChatMessage(int Id, string Content, int TimePosted)
         {
-            this.MessageId = Id;
+            this.Id = Id;
             this.Content = Content;
             this.TimePosted = TimePosted;
             this.CreatedAt = DateTime.Now;
