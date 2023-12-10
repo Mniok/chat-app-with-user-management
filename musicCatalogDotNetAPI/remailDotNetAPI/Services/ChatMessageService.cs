@@ -12,7 +12,7 @@ namespace musicCatalogDotNetAPI.Services
 {
     public interface IChatMessageService
     {
-        Models.ChatMessage CreateChatMessage(string content, int timePosted, string uploaderName);  //notice: should be async! Not async for now
+        Models.ChatMessage CreateChatMessage(string content, Int64 timePosted, string uploaderName);  //notice: should be async! Not async for now
         Models.ChatMessage CleanupChatMessage(Models.ChatMessage chatMessage);
 
         // TODO: edit message
@@ -30,7 +30,7 @@ namespace musicCatalogDotNetAPI.Services
         }
 
 
-        public Models.ChatMessage CreateChatMessage(string content, int timePosted, string uploaderName)
+        public Models.ChatMessage CreateChatMessage(string content, Int64 timePosted, string uploaderName)
         {
             int newId = _context.ChatMessage.Count() + 1;
 

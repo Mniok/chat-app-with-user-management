@@ -140,7 +140,7 @@ namespace musicCatalogDotNetAPI.Controllers
         public string Content { get; set; }
 
         [JsonPropertyName("timePosted")]
-        public int TimePosted { get; set; }
+        public Int64 TimePosted { get; set; }
 
     }
 

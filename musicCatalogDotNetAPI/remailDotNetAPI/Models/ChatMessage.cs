@@ -6,7 +6,7 @@
 
         public string Content { get; set; }
 
-        public int TimePosted { get; set; }   // UnixTime, should be using DateTime CreatedAt for this but this should make it simpler
+        public Int64 TimePosted { get; set; }   // UnixTime, should be using DateTime CreatedAt for this but this should make it simpler
 
         public DateTime CreatedAt { get; set; }
 
@@ -16,7 +16,7 @@
 
 
 
-        public ChatMessage(int Id, string Content, int TimePosted)
+        public ChatMessage(int Id, string Content, Int64 TimePosted)
         {
             this.Id = Id;
             this.Content = Content;
