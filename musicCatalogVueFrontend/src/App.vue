@@ -4,6 +4,7 @@
       app
       color="indigo lighten-1"
       dark
+      height="64"
     >
       
       <div class="d-flex align-center">
