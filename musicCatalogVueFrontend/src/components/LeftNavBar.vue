@@ -11,6 +11,30 @@
     </v-container>
 </template>
 
+<script setup lang="ts">
+import { ref, watch, onMounted, onUpdated, nextTick } from 'vue';
+import { useChatStore } from '@/store/chat';
+
+const chatStore = useChatStore();
+
+const canScrollDown = ref(true);
+
+function scrollToBottom() {
+    if (canScrollDown.value) {
+        canScrollDown.value = false;
+        nextTick(() => {
+            const scrollableContent = document.querySelector('.default-slot-column')
+            if (!scrollableContent) return;
+            scrollableContent.scrollTo({top: scrollableContent.scrollHeight});
+        });
+    }
+}
+
+watch(chatStore.loadedMessages, () => { canScrollDown.value = true; })
+
+onUpdated(scrollToBottom)
+</script>
+
 <style lang="scss">
 $footer-thickness: 52px;
 $header-thickness: 64px; // on v-app-bar in App.vue
