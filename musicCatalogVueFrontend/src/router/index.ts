@@ -37,17 +37,22 @@ const routes: Array<RouteConfig> = [
   {
     path: '/settings',
     name: 'settings',
-    component: () => import('../views/SettingsView.vue')
+    component: () => import('../views/SettingsView.vue') // not used at all
   },
   {
     path: '/song/:id',  //$route.params.id
     name: 'song',
-    component: () => import('../views/SongView.vue')
+    component: () => import('../views/SongView.vue') // ! not used in this project
   },
   {
     path: '/upload',
     name: 'upload',
-    component: () => import('../views/UploadSongView.vue')
+    component: () => import('../views/UploadSongView.vue') /// ! not used in this project
+  },
+  {
+    path: '/manage',
+    name: 'manage',
+    component: () => import('../views/ManageUsersView.vue')
   },
 ]
 

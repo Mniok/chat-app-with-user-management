@@ -7,7 +7,7 @@
     >
       
       <div class="d-flex align-center">
-        <v-icon x-large>mdi-folder-music</v-icon>
+        <v-icon x-large>mdi-chat</v-icon>
 
         <router-link :to="isLoggedIn ? '/app' : '/login'" class="no-decorators">
           <h4 class="mt-2 ml-2 white--text">{{this.$appName}}</h4>
@@ -17,13 +17,13 @@
       <v-spacer></v-spacer>
 
       <v-btn to="/app" text :disabled="!isLoggedIn" class="no-decorators">
-        <span v-if="!isLoggedIn" class="mr-2">Not logged in</span>
-        <span v-else class="mr-2">Logged in as {{currentUser}}</span>
+        <span v-if="!isLoggedIn" class="mr-2">Nie zalogowano</span>
+        <span v-else class="mr-2">Zalogowano jako {{currentUser}}</span>
         <v-icon>mdi-account-circle</v-icon>
       </v-btn>
-      <v-btn to="/settings" v-if="isLoggedIn" text color="blue lighten-2" class="no-decorators">
+      <!-- <v-btn to="/settings" v-if="isLoggedIn" text color="blue lighten-2" class="no-decorators">
         <v-icon color="grey lighten-2">mdi-cog</v-icon>
-      </v-btn>
+      </v-btn> -->
       <v-btn v-if="isLoggedIn" text color="red lighten-2" @click="logout">
         <span class="grey--text text--lighten-2">Log out</span>
       </v-btn>
@@ -48,6 +48,7 @@
         </v-card-text>
       </v-card>
     </v-footer>
+    <div style="height: 52px" /> <!-- to compensate for footer when scrolling down -->
 
 
   </v-app>

@@ -17,7 +17,7 @@ const pinia = createPinia();
 pinia.use(({ store }) => { store.$router = markRaw(router) });
 Vue.use(VueCompositionAPI);
 
-Vue.prototype.$appName = 'note-a-logue';
+Vue.prototype.$appName = 'Aplikacja Chat';
 
 Vue.config.productionTip = false;
 
