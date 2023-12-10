@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios';
 import { vueApp } from '../main';   //// dla routera
 import { ChatMessage } from '@/models/ChatMessage';
-import { getPosts } from '@/service/chatService';
+import { getPosts, postChatMessage } from '@/service/chatService';
 
 interface ChatStoreState {
     currentMessageContent: string;
@@ -31,6 +31,13 @@ export const useChatStore = defineStore('chatStore', {
                 wasRemoved: messageData.wasRemoved
             }
         })
+    },
+
+    async createMessage(): Promise<void> {
+        const response = await postChatMessage(this.currentMessageContent, Date.now());
+        if (response.id)
+            this.currentMessageContent = '';
+        this.loadMessages();
     }
 
   },

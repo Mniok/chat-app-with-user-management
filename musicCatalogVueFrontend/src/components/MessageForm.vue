@@ -13,6 +13,7 @@
             icon fab medium
             :disabled="!canMessageBePosted"
             color="indigo lighten-1"
+            @click="chatStore.createMessage"
         >
             <v-icon x-large color="indigo lighten-1">
                 mdi-send-circle
