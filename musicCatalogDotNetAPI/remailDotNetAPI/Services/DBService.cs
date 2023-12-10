@@ -27,10 +27,11 @@ namespace musicCatalogDotNetAPI.Services
 
 
         public DbSet<Models.User> User { get; set; }
-        public DbSet<Models.Song> Song { get; set; }
-        public DbSet<Models.Artist> Artist { get; set; }
-        public DbSet<Models.Genre> Genre { get; set; }
-        public DbSet<Models.Link> Link { get; set; }
+        public DbSet<Models.Song> Song { get; set; } // ! unused in this project! can be deleted later
+        public DbSet<Models.Artist> Artist { get; set; } // ! unused in this project! can be deleted later
+        public DbSet<Models.Genre> Genre { get; set; } // ! unused in this project! can be deleted later
+        public DbSet<Models.Link> Link { get; set; } // ! unused in this project! can be deleted later
+        public DbSet<Models.ChatMessage> ChatMessage { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

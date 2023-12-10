@@ -10,7 +10,7 @@ using musicCatalogDotNetAPI.Controllers;
 
 namespace musicCatalogDotNetAPI.Services
 {
-    public interface ISongService
+    public interface ISongService // !! unused in this project! can be deleted later
     {
         Models.Song CreateSong(string title, int time, string desc, /*Models.User uploader,*/ string uploaderName, List<string> artists, List<string> genres, List<UploadLink> links);  //notice: should be async! Not async for now
         //Models.Artist CreateArtist(string name);
