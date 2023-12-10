@@ -13,7 +13,7 @@ namespace musicCatalogDotNetAPI.Services
     public interface IChatMessageService
     {
         Models.ChatMessage CreateChatMessage(string content, int timePosted, string uploaderName);  //notice: should be async! Not async for now
-        Models.ChatMessage MarkChatMessageAsDeleted(Models.ChatMessage chatMessage);
+        Models.ChatMessage CleanupChatMessage(Models.ChatMessage chatMessage);
 
         // TODO: edit message
     }
@@ -50,15 +50,14 @@ namespace musicCatalogDotNetAPI.Services
 
         }
 
-        public Models.ChatMessage MarkChatMessageAsDeleted(Models.ChatMessage chatMessage)
-        {
-            chatMessage.WasRemoved = true;
-
-            // chatMessage.UploadedBy.postedMessages.Clear(); //to reduce circular references // TODO: check if this is needed? it was used in clearSong
+        public Models.ChatMessage CleanupChatMessage(Models.ChatMessage chatMessage)
+        {   // ONLY FOR RETURNNG THROUGH API! THIS DOESN'T AFFECT DATA IN DATABASE!
+            chatMessage.UploadedBy.Password = "***";
+            chatMessage.UploadedBy.uploadedSongs.Clear(); // to reduce circular references
+            chatMessage.UploadedBy.postedMessages.Clear();
 
             return chatMessage;
         }
-
 
     }
 
