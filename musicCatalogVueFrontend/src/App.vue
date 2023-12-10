@@ -43,7 +43,7 @@
         <v-card-text class="white--text pt-2 pb-2">
           <v-btn to="/about" color="blue lighten-5" class="no-decorators" text rounded>
             <v-icon>mdi-card-account-details-outline</v-icon>
-            <span class="ml-2">contact/about</span>
+            <span class="ml-2">o projekcie</span>
           </v-btn>
         </v-card-text>
       </v-card>
