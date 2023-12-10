@@ -9,6 +9,7 @@
                 outlined
                 placeholder="Pisz..."
                 class="mr-3"
+                @keyup="handlePostMessageOnEnter"
             />
         </v-form>
 
@@ -80,5 +81,11 @@ function handlePickedEmoji(emoji: {
     // TODO: add emoji at cursor position
     // ! EDIT: doesn't seem possible in vuetify2 - selectionStart and selectionEnd don't show up in vue devtools, and opening emojipicker deselects text in textarea anyway
     chatStore.currentMessageContent += emoji.data;
+}
+
+function handlePostMessageOnEnter(keyEvent: KeyboardEvent) {
+    if (keyEvent.key === 'Enter' && !keyEvent.shiftKey) {
+        chatStore.createMessage()
+    }
 }
 </script>
