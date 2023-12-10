@@ -13,7 +13,7 @@
 
 <style lang="scss">
 $footer-thickness: 52px;
-$header-thickness: 56px;
+$header-thickness: 64px; // on v-app-bar in App.vue
 .navbar-column {
     width: $footer-thickness;
     background-color: #3F51B5 !important; // vuetify indigo
