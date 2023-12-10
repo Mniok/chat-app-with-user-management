@@ -14,9 +14,9 @@
 
         public string? UserRole { get; set; }
 
-        public int? MutedUntil { get; set; } // UnixTime timestamp
+        public Int64? MutedUntil { get; set; } // UnixTime timestamp
 
-        public int? BannedUntil { get; set; } // same
+        public Int64? BannedUntil { get; set; } // same
 
 
 

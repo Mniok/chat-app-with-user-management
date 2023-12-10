@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using musicCatalogDotNetAPI.Models;
 using musicCatalogDotNetAPI.Services;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace musicCatalogDotNetAPI.Controllers
 {
@@ -21,7 +24,7 @@ namespace musicCatalogDotNetAPI.Controllers
             _context = context;
         }
 
-        // GET: api/User
+        // GET: api/User // get users list
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
@@ -85,6 +88,67 @@ namespace musicCatalogDotNetAPI.Controllers
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }*/
         /// moved to AccountController -> register
+
+
+        // _______________________________________________________ new for chat app
+
+        [EnableCors]
+        [HttpPost("mute")]
+        [Authorize]
+        public async Task<ActionResult<User>> MuteUser(int userId, Int64 mutedUntil)
+        {
+            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == userId select user).First();
+
+
+            targetUser.MutedUntil = mutedUntil;
+            _context.SaveChanges();
+
+            return targetUser;
+        }
+
+        [EnableCors]
+        [HttpPost("unmute")]
+        [Authorize]
+        public async Task<ActionResult<User>> UnmuteUser(int userId)
+        {
+            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == userId select user).First();
+
+
+            targetUser.MutedUntil = null;
+            _context.SaveChanges();
+
+            return targetUser;
+        }
+
+        [EnableCors]
+        [HttpPost("ban")]
+        [Authorize]
+        public async Task<ActionResult<User>> BanUser(int userId, Int64 bannedUntil)
+        {
+            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == userId select user).First();
+
+
+            targetUser.BannedUntil = bannedUntil;
+            _context.SaveChanges();
+
+            return targetUser;
+        }
+
+        [EnableCors]
+        [HttpPost("unban")]
+        [Authorize]
+        public async Task<ActionResult<User>> UnbanUser(int userId)
+        {
+            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == userId select user).First();
+
+
+            targetUser.BannedUntil = null;
+            _context.SaveChanges();
+
+            return targetUser;
+        }
+
+        // / _____________________________________________________ end of new for chat app
 
 
         // DELETE: api/Users/5
