@@ -29,7 +29,10 @@
             <!-- mute action -->
 
             <!-- unmute action -->
-            <ConfirmDialog @confirm="handleUnmute"> 
+            <ConfirmDialog
+                :text="`Czy na pewno chcesz zdjąć wyciszenie z użytkownika ${user?.userName}?`"
+                @confirm="handleUnmute"
+            > 
                 <template v-slot="{ on, attrs }">
                     <v-btn
                         icon fab medium
