@@ -20,22 +20,22 @@ export const useUserStore = defineStore('userStore', {
     },
 
     async muteUserById(userId: number, mutedUntil: number): Promise<void> {
-        muteUser(userId, mutedUntil);
+        await muteUser(userId, mutedUntil);
         this.loadUsers();
     },
 
     async unmuteUserById(userId: number): Promise<void> {
-        unmuteUser(userId);
+        await unmuteUser(userId);
         this.loadUsers();
     },
 
     async banUserById(userId: number, bannedUntil: number): Promise<void> {
-        banUser(userId, bannedUntil);
+        await banUser(userId, bannedUntil);
         this.loadUsers();
     },
 
     async unbanUserById(userId: number): Promise<void> {
-        unbanUser(userId);
+        await unbanUser(userId);
         this.loadUsers();
     },
 

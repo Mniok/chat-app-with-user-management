@@ -18,16 +18,26 @@ import ChatMessage from '@/components/ChatMessage.vue';
 import MessageForm from '@/components/MessageForm.vue';
 import LeftNavBar from '@/components/LeftNavBar.vue';
 import { useChatStore } from '@/store/chat';
+import { useUserStore } from '@/store/user';
 
 const chatStore = useChatStore();
+const userStore = useUserStore();
 
 chatStore.loadMessages()
-const intervalHandle = ref(0);
+userStore.loadUsers() // needed here to detect mutes and bans
+const chatIntervalHandle = ref(0);
+const userIntervalHandle = ref(0);
 
 onMounted(() => {
-  intervalHandle.value = setInterval(chatStore.loadMessages, 2000) // ! here set how ofter chat is refreshed
+  chatIntervalHandle.value = setInterval(chatStore.loadMessages, 2000) // ! here set how ofter chat is refreshed
 })
-onUnmounted(() => { clearInterval(intervalHandle.value) });
+onUnmounted(() => { clearInterval(chatIntervalHandle.value) });
+
+
+onMounted(() => {
+  userIntervalHandle.value = setInterval(userStore.loadUsers, 5000) // ! here set how ofter users management panel is updated (new users, changes to mutes and bans)
+})
+onUnmounted(() => { clearInterval(userIntervalHandle.value) });
 </script>
 
 <style lang="scss">
