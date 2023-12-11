@@ -24,7 +24,7 @@ userStore.loadUsers()
 const intervalHandle = ref(0);
 
 onMounted(() => {
-intervalHandle.value = setInterval(userStore.loadUsers, 5000) // ! here set how ofter users management panel is updated (new users, changes to mutes and bans)
+    intervalHandle.value = setInterval(userStore.loadUsers, 2000) // ! here set how ofter users management panel is updated (new users, changes to mutes and bans)
 })
 onUnmounted(() => { clearInterval(intervalHandle.value) });
 </script>

@@ -114,17 +114,13 @@ import { User } from '@/models/User';
 import ConfirmDialog from '@/components/Dialogs/ConfirmDialog.vue'
 import DurationDialog from '@/components/Dialogs/DurationDialog.vue'
 import { useUserStore } from '@/store/user';
+import { getTimeLocaleString } from '@/helpers';
 
 const userStore = useUserStore();
 
 const props = defineProps({
   user: Object as PropType<User>
 })
-
-function getTimeLocaleString(timestamp: number) {
-    const dateObject = new Date(timestamp);
-    return dateObject.toLocaleString();
-}
 
 function handleMute(duration: string) {
     if (!props.user) return;
