@@ -95,12 +95,12 @@ namespace musicCatalogDotNetAPI.Controllers
         [EnableCors]
         [HttpPost("mute")]
         [Authorize]
-        public async Task<ActionResult<User>> MuteUser(int userId, Int64 mutedUntil)
+        public async Task<ActionResult<User>> MuteUser([FromBody] MuteRequest request)
         {
-            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == userId select user).First();
+            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == request.UserId select user).First();
 
 
-            targetUser.MutedUntil = mutedUntil;
+            targetUser.MutedUntil = request.MutedUntil;
             _context.SaveChanges();
 
             return targetUser;
@@ -109,9 +109,9 @@ namespace musicCatalogDotNetAPI.Controllers
         [EnableCors]
         [HttpPost("unmute")]
         [Authorize]
-        public async Task<ActionResult<User>> UnmuteUser(int userId)
+        public async Task<ActionResult<User>> UnmuteUser([FromBody] UnbanRequest request)
         {
-            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == userId select user).First();
+            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == request.UserId select user).First();
 
 
             targetUser.MutedUntil = null;
@@ -123,12 +123,12 @@ namespace musicCatalogDotNetAPI.Controllers
         [EnableCors]
         [HttpPost("ban")]
         [Authorize]
-        public async Task<ActionResult<User>> BanUser(int userId, Int64 bannedUntil)
+        public async Task<ActionResult<User>> BanUser([FromBody] BanRequest request)
         {
-            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == userId select user).First();
+            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == request.UserId select user).First();
 
 
-            targetUser.BannedUntil = bannedUntil;
+            targetUser.BannedUntil = request.BannedUntil;
             _context.SaveChanges();
 
             return targetUser;
@@ -137,9 +137,9 @@ namespace musicCatalogDotNetAPI.Controllers
         [EnableCors]
         [HttpPost("unban")]
         [Authorize]
-        public async Task<ActionResult<User>> UnbanUser(int userId)
+        public async Task<ActionResult<User>> UnbanUser([FromBody] UnbanRequest request)
         {
-            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == userId select user).First();
+            Models.User targetUser = (from user in _context.User.ToList() where user.UserId == request.UserId select user).First();
 
 
             targetUser.BannedUntil = null;

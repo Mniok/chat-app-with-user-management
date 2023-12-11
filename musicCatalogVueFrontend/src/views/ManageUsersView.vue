@@ -1,12 +1,11 @@
 <template>
     <v-container fluid class="p-0 m-0">
       <LeftNavBar>
-        <div class="py-8 px-12">
+        <div class="d-flex flex-column py-8 px-12">
             <ManageUserTile
                 v-for="i in userStore.usersList"
                 :key="i.userId"
                 :user="i"
-                class="d-flex flex-column"
             />
         </div>
       </LeftNavBar>

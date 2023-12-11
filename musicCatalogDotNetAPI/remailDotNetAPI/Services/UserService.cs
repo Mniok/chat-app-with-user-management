@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using musicCatalogDotNetAPI.Models;
+using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 ///using Microsoft.AspNetCore.Mvc;
 
 namespace musicCatalogDotNetAPI.Services
@@ -124,5 +126,34 @@ namespace musicCatalogDotNetAPI.Services
     {
         public const string Admin = nameof(Admin);
         public const string BasicUser = nameof(BasicUser);
+    }
+
+
+    public class MuteRequest
+    {
+        [Required]
+        [JsonPropertyName("userId")]
+        public int UserId { get; set; }
+
+        [JsonPropertyName("mutedUntil")]
+        public Int64 MutedUntil { get; set; }
+    }
+
+    public class BanRequest
+    {
+        [Required]
+        [JsonPropertyName("userId")]
+        public int UserId { get; set; }
+
+        [JsonPropertyName("bannedUntil")]
+        public Int64 BannedUntil { get; set; }
+    }
+
+    public class UnbanRequest
+    {
+        [Required]
+        [JsonPropertyName("userId")]
+        public int UserId { get; set; }
+
     }
 }
