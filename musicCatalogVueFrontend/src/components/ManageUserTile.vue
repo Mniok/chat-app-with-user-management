@@ -34,12 +34,12 @@
                 > 
                     <template v-slot="{ on, attrs }">
                         <v-btn
-                            icon fab medium
+                            icon fab small
                             color="red lighten-1"
                             v-bind="attrs"
                             v-on="on"
                         >
-                            <v-icon large color="red lighten-1">
+                            <v-icon medium color="red lighten-1">
                                 mdi-message-bulleted-off
                             </v-icon>
                         </v-btn>
@@ -53,12 +53,12 @@
                 > 
                     <template v-slot="{ on, attrs }">
                         <v-btn
-                            icon fab medium
+                            icon fab small
                             color="green lighten-1"
                             v-bind="attrs"
                             v-on="on"
                         >
-                            <v-icon large color="green lighten-1">
+                            <v-icon medium color="green lighten-1">
                                 mdi-message-bulleted
                             </v-icon>
                         </v-btn>
@@ -66,8 +66,42 @@
                 </ConfirmDialog>
 
                 <!-- ban action -->
+                <DurationDialog
+                    :text="`Na jak dlugo chcesz zbanować użytkownika ${user?.userName}?`"
+                    @confirm="handleBan"
+                > 
+                    <template v-slot="{ on, attrs }">
+                        <v-btn
+                            icon fab small
+                            color="red lighten-1"
+                            v-bind="attrs"
+                            v-on="on"
+                        >
+                            <v-icon medium color="red lighten-1">
+                                mdi-gavel
+                            </v-icon>
+                        </v-btn>
+                    </template>
+                </DurationDialog>
 
                 <!-- unban action -->
+                <ConfirmDialog
+                    :text="`Czy na pewno chcesz odbanować użytkownika ${user?.userName}?`"
+                    @confirm="handleUnban"
+                > 
+                    <template v-slot="{ on, attrs }">
+                        <v-btn
+                            icon fab small
+                            color="green lighten-1"
+                            v-bind="attrs"
+                            v-on="on"
+                        >
+                            <v-icon medium color="green lighten-1">
+                                mdi-gavel
+                            </v-icon>
+                        </v-btn>
+                    </template>
+                </ConfirmDialog>
             </div>
         </div>
         <v-divider dark />
@@ -99,6 +133,15 @@ function handleMute(duration: string) {
 function handleUnmute() {
     if (!props.user) return;
     userStore.unmuteUserById(props.user.userId);
+}
+
+function handleBan(duration: string) {
+    if (!props.user) return;
+    userStore.banUserById(props.user.userId, Date.now() + getMsFromDuration(duration));
+}
+function handleUnban() {
+    if (!props.user) return;
+    userStore.unbanUserById(props.user.userId);
 }
 
 function getMsFromDuration(duration: string) {
