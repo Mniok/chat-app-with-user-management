@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import ChatMessage from '@/components/ChatMessage.vue';
 import MessageForm from '@/components/MessageForm.vue';
 import LeftNavBar from '@/components/LeftNavBar.vue';
@@ -22,9 +22,12 @@ import { useChatStore } from '@/store/chat';
 const chatStore = useChatStore();
 
 chatStore.loadMessages()
-const intervalHandle = setInterval(chatStore.loadMessages, 2000) // ! here set how ofter chat is refreshed
+const intervalHandle = ref(0);
 
-onUnmounted(() => { clearInterval(intervalHandle) });
+onMounted(() => {
+  intervalHandle.value = setInterval(chatStore.loadMessages, 2000) // ! here set how ofter chat is refreshed
+})
+onUnmounted(() => { clearInterval(intervalHandle.value) });
 </script>
 
 <style lang="scss">

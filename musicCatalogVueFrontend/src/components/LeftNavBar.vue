@@ -2,7 +2,25 @@
     <v-container fluid class="p-0 m-0">
         <v-row class="entire-screen-height p-0 m-0">
             <div class="navbar-column">
-                <!-- TODO nav icons between chat and manage users -->
+                <v-btn
+                    icon fab medium
+                    color="indigo lighten-2"
+                    to="app"
+                >
+                    <v-icon x-large color="indigo lighten-2">
+                        mdi-forum
+                    </v-icon>
+                </v-btn>
+                <v-btn
+                    icon fab medium
+                    color="indigo lighten-2"
+                    to="manage"
+                    :disabled="accountStore.currentUser !== 'Admin'"
+                >
+                    <v-icon x-large color="indigo lighten-2">
+                        mdi-account-group
+                    </v-icon>
+                </v-btn>
             </div>
             <v-col class="default-slot-column">
                 <slot />
@@ -14,8 +32,10 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUpdated, nextTick } from 'vue';
 import { useChatStore } from '@/store/chat';
+import { useAccountStore } from '@/store/account';
 
 const chatStore = useChatStore();
+const accountStore = useAccountStore();
 
 const canScrollDown = ref(true);
 
