@@ -27,19 +27,20 @@ Inside the frontend project folder (musicCatalogVueFrontend/):
 5. npm install pinia
 6. npm install axios
 7. npm install v-emoji-picker
-In case of dependency errors, install the above with the --force flag
+8. npm install bad-words --save --force
+9. npm install @types/bad-words --save --force
+In case of dependency errors, install all of the above with the --force flag
 
 You might also need to install the following:
-8. npm install -g @vue/cli-service
-9. npm install -g @vue/cli-plugin-babel
-10. npm install -g @vue/cli-plugin-e2e-cypress
-11. npm install -g @vue/cli-plugin-pwa
-12. npm install -g @vue/cli-plugin-typescript
-13. npm install -g @vue/cli-plugin-unit-jest
-14. npm install -g vue-cli-plugin-axios
-15. npm install -g vue-cli-plugin-bootstrap
-16. npm install -g vue-cli-plugin-pinia
-17. npm install -g vue-cli-plugin-vuetify
+- npm install -g @vue/cli-service
+- npm install -g @vue/cli-plugin-babel
+- npm install -g @vue/cli-plugin-e2e-cypress
+- npm install -g @vue/cli-plugin-pwa
+- npm install -g @vue/cli-plugin-typescript
+- npm install -g @vue/cli-plugin-unit-jest
+- npm install -g vue-cli-plugin-axios
+- npm install -g vue-cli-plugin-bootstrap
+- npm install -g vue-cli-plugin-vuetify
 
 To run this:
 1. start up backend by building solution (musicCatalogDotNetAPI.sln) in Visual Studio

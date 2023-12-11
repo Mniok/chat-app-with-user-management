@@ -3,6 +3,7 @@ import axios from 'axios';
 import { vueApp } from '../main';   //// dla routera
 import { ChatMessage } from '@/models/ChatMessage';
 import { getPosts, postChatMessage } from '@/service/chatService';
+import Filter from 'bad-words';
 
 interface ChatStoreState {
     currentMessageContent: string;
@@ -34,10 +35,12 @@ export const useChatStore = defineStore('chatStore', {
     },
 
     async createMessage(): Promise<void> {
-        const response = await postChatMessage(this.currentMessageContent, Date.now());
-        if (response.id)
-            this.currentMessageContent = '';
-        this.loadMessages();
+      const wordsFilter = new Filter();
+      const cleanMessageContent = wordsFilter.clean(this.currentMessageContent)
+      const response = await postChatMessage(cleanMessageContent, Date.now());
+      if (response.id)
+        this.currentMessageContent = '';
+      this.loadMessages();
     }
 
   },
