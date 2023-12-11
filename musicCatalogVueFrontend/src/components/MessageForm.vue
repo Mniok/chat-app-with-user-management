@@ -8,6 +8,9 @@
                 v-model="chatStore.currentMessageContent"
                 outlined
                 placeholder="Pisz..."
+                :error-messages="(currentUser?.mutedUntil && currentUser.mutedUntil > Date.now())
+                    ? [`Jesteś wyciszony do ${getTimeLocaleString(currentUser.mutedUntil)}`]
+                    : []"
                 class="mr-3"
                 @keyup="handlePostMessageOnEnter"
             />
@@ -56,17 +59,27 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useChatStore } from '@/store/chat';
+import { useUserStore } from '@/store/user';
+import { useAccountStore } from '@/store/account';
 import { VEmojiPicker } from 'v-emoji-picker';
+import { getTimeLocaleString } from '@/helpers';
 
 const chatStore = useChatStore();
+const userStore = useUserStore();
+const accountStore = useAccountStore();
 
 const isEmojiPickerOpen = ref(false);
 const postContentTextarea = ref();
 
 const canMessageBePosted = computed(() => {
-    return chatStore.currentMessageContent.length;
-    // TODO: block if user is muted or banned (though even seeing this shouldn't be possible if banned)
-    // TODO: block if prohibited words detected (1984)
+    return chatStore.currentMessageContent.length
+        && !(currentUser.value?.mutedUntil && currentUser.value.mutedUntil > Date.now())
+        && !(currentUser.value?.bannedUntil && currentUser.value.bannedUntil > Date.now());
+    // TODO: block if prohibited words detected (1984), either that turn them into asterisks
+})
+
+const currentUser = computed(() => {
+  return userStore.usersList.find((user) => user.userName === accountStore.currentUser)
 })
 
 function handlePickedEmoji(emoji: {
@@ -84,7 +97,7 @@ function handlePickedEmoji(emoji: {
 }
 
 function handlePostMessageOnEnter(keyEvent: KeyboardEvent) {
-    if (keyEvent.key === 'Enter' && !keyEvent.shiftKey) {
+    if (keyEvent.key === 'Enter' && !keyEvent.shiftKey && canMessageBePosted.value) {
         chatStore.createMessage()
     }
 }
